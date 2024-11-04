@@ -3,7 +3,6 @@
   {
     "id": 1,
     "title": "Betta Fish",
-    "category": "Category A",
     "price": 11.99,
     "image": "/images/betta.jpg",
     "description": "small colorful betta fish."
@@ -11,7 +10,6 @@
   {
     "id": 2,
     "title": "Blob Fish",
-    "category": "Category B",
     "price": 40.99,
     "image": "/images/blobfish.jpg",
     "description": "ugly fish, but very rare."
@@ -19,7 +17,6 @@
   {
     "id": 3,
     "title": "Catfish",
-    "category": "Category C",
     "price": 30.99,
     "image": "/images/catfish.jpg",
     "description": "loves to eat scraps at the bottom of the water."
@@ -27,7 +24,6 @@
   {
     "id": 4,
     "title": "Clownfish",
-    "category": "Category D",
     "price": 28.99,
     "image": "/images/clownfish.webp",
     "description": "adorable small fish."
@@ -35,17 +31,36 @@
   {
     "id": 5,
     "title": "Megalodon",
-    "category": "Category E",
     "price": 999999.99,
     "image": "/images/megalodon.webp",
     "description": "massive prehistoric shark, super rare"
   },
   {
     "id": 6,
-    "title": "plankton",
-    "category": "Category F",
+    "title": "Zooplankton",
     "price": 0.01,
     "image": "/images/plankton.jpg",
     "description": "tiny sea creature."
+  },
+  {
+    "id": 7,
+    "title": "Moray Eel",
+    "price": 101.99,
+    "image": "/images/moray.jpg",
+    "description": "large dangerous eel."
+  },
+  {
+    "id": 8,
+    "title": "Anglerfish",
+    "price": 300.49,
+    "image": "/images/angler.png",
+    "description": "hideous deep sea creature."
+  },
+  {
+    "id": 9,
+    "title": "Largemouth Bass",
+    "price": 30.09,
+    "image": "/images/Largemouth Bass.webp",
+    "description": "common river fish."
   }
 ]

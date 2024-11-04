@@ -41,42 +41,40 @@ const Browse = () => {
   ));
 
   const listItems = catalog.map((el) => (
-    <div className="row border-top border-bottom" key={el.id}>
-      <div className="row main align-items-center">
-        <div className="col-2">
-          <img className="img-fluid" src={el.image} alt={el.title} />
-        </div>
-        <div className="col">
-          <div className="row text-muted">{el.title}</div>
-          <div className="row">{el.category}</div>
-          <div className="row">{el.description}</div>
-        </div>
-        <div className="col">
-          <button type="button" onClick={() => removeFromCart(el)}>
-            {" "}
-            -{" "}
-          </button>{" "}
-          <button type="button" onClick={() => addToCart(el)}>
-            {" "}
-            +{" "}
-          </button>
-        </div>
-        <div className="col">
-          ${el.price} <span className="close">&#10005;</span>
+    <div className="col-md-4 mb-4" key={el.id}>
+      <div className="card">
+        <img src={el.image} className="card-img-top" alt={el.title} />
+        <div className="card-body">
+          <h5 className="card-title">{el.title}</h5>
+          <p className="card-text">{el.description}</p>
+          <p className="card-text"><strong>${el.price}</strong></p>
+          <div className="d-flex justify-content-between">
+            <button className="btn btn-danger" onClick={() => removeFromCart(el)}>
+              -
+            </button>
+            <button className="btn btn-success" onClick={() => addToCart(el)}>
+              +
+            </button>
+          </div>
         </div>
       </div>
     </div>
   ));
 
   return (
-    <div>
-      <h2>Browse Products</h2>
-      <div className="card">
-        <div>{listItems}</div>
-      </div>
-      <div>
-        <h4>Shopping Cart</h4>
-        <div>{cartItems}</div>
+    <div className="container">
+      <h2 className="my-4">Browse Products</h2>
+      <div className="row">{listItems}</div>
+      <div className="card mt-4">
+        <div className="card-header">
+          <h4>Shopping Cart</h4>
+        </div>
+        <div className="card-body">
+          <div>{cartItems}</div>
+          <div className="text-end">
+            <strong>Total: ${cartTotal}</strong>
+          </div>
+        </div>
       </div>
     </div>
   );
