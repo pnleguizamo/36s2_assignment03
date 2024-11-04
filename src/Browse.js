@@ -20,48 +20,31 @@ const Browse = () => {
   }, []);
 
   useEffect(() => {
-    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const total = cart.reduce((acc, item) => acc + item.price, 0);
     setCartTotal(total);
   }, [cart]);
 
-  const howManyofThis = (id) => {
-    const item = cart.find(cartItem => cartItem.id === id);
-    return item ? item.quantity : 0;
-  };
-
   const addToCart = (el) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find(item => item.id === el.id);
-      if (existingItem) {
-        return prevCart.map(item =>
-          item.id === el.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      } else {
-        return [...prevCart, { ...el, quantity: 1 }];
-      }
-    });
+    setCart((prevCart) => [...prevCart, el]);
   };
 
   const removeFromCart = (el) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find(item => item.id === el.id);
-      if (existingItem) {
-        if (existingItem.quantity > 1) {
-          return prevCart.map(item =>
-            item.id === el.id ? { ...item, quantity: item.quantity - 1 } : item
-          );
-        } else {
-          return prevCart.filter(item => item.id !== el.id);
-        }
-      }
-      return prevCart;
-    });
+    const updatedCart = cart.filter((cartItem) => cartItem.id !== el.id);
+    setCart(updatedCart);
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const howManyofThis = (id) => {
+    return cart.filter((cartItem) => cartItem.id === id).length;
   };
 
   const cartItems = cart.map((el, index) => (
     <div key={index}>
       <img className="img-fluid" src={el.image} width={150} alt={el.title} />
-      {el.title} ${el.price} x {el.quantity}
+      {el.title} ${el.price} x {howManyofThis(el.id)}
     </div>
   ));
 
@@ -92,16 +75,21 @@ const Browse = () => {
 
   return (
     <div className="container">
-      <h2 className="my-4">Browse Fish</h2>
+      <h2 className="my-4">Browse Products</h2>
       <div className="row">{listItems}</div>
       <div className="card mt-4">
         <div className="card-header">
           <h4>Shopping Cart</h4>
         </div>
         <div className="card-body">
-          <div>{cartItems.length > 0 ? cartItems : <p>Cart is Empty!</p>}</div>
+          <div>{cartItems.length > 0 ? cartItems : <p>Your cart is empty</p>}</div>
           <div className="text-end">
             <strong>Total: ${cartTotal.toFixed(2)}</strong>
+          </div>
+          <div className="text-end mt-2">
+            <button className="btn btn-warning" onClick={clearCart}>
+              Clear All
+            </button>
           </div>
         </div>
       </div>
