@@ -92,14 +92,14 @@ const Browse = () => {
 
   return (
     <div className="container">
-      <h2 className="my-4">Browse Products</h2>
+      <h2 className="my-4">Browse Fish</h2>
       <div className="row">{listItems}</div>
       <div className="card mt-4">
         <div className="card-header">
           <h4>Shopping Cart</h4>
         </div>
         <div className="card-body">
-          <div>{cartItems.length > 0 ? cartItems : <p>Your cart is empty</p>}</div>
+          <div>{cartItems.length > 0 ? cartItems : <p>Cart is Empty!</p>}</div>
           <div className="text-end">
             <strong>Total: ${cartTotal.toFixed(2)}</strong>
           </div>
