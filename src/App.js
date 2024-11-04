@@ -22,14 +22,14 @@ function App() {
       case 1:
         return <ShowProducts cart={cart} setCart={setCart} cartTotal={cartTotal} setCartTotal={setCartTotal} dataF = {dataf} setDataF = {setDataF} viewer = {viewer} setViewer = {setViewer} />;
       case 2:
-        return <Summary dataF = {dataf} setDataF = {setDataF} />;
+        return <Summary cart={cart} setCart={setCart} cartTotal={cartTotal} setCartTotal={setCartTotal}c dataF = {dataf} setDataF = {setDataF} viewer = {viewer} setViewer = {setViewer} />;
     }
   };
 
   return (
     <div>
       <nav>
-        <button onClick={() => setViewer(0)}>Browse</button>
+        { viewer == 1 ? <button onClick={() => setViewer(0)}>Return</button> : <></>}
         <button onClick={() => setViewer(1)}>Checkout</button>
       </nav>
       <div>
