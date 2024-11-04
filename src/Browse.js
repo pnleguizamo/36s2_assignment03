@@ -8,35 +8,60 @@ const Browse = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/fishlist.json");
-      const data = await response.json();
-      setCatalog(data);
+      try {
+        const response = await fetch("/fishlist.json");
+        const data = await response.json();
+        setCatalog(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setCartTotal(total);
+  }, [cart]);
+
+  const howManyofThis = (id) => {
+    const item = cart.find(cartItem => cartItem.id === id);
+    return item ? item.quantity : 0;
+  };
+
   const addToCart = (el) => {
-    setCart([...cart, el]);
+    setCart((prevCart) => {
+      const existingItem = prevCart.find(item => item.id === el.id);
+      if (existingItem) {
+        return prevCart.map(item =>
+          item.id === el.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevCart, { ...el, quantity: 1 }];
+      }
+    });
   };
 
   const removeFromCart = (el) => {
-    let itemFound = false;
-    const updatedCart = cart.filter((cartItem) => {
-      if (cartItem.id === el.id && !itemFound) {
-        itemFound = true;
-        return false;
+    setCart((prevCart) => {
+      const existingItem = prevCart.find(item => item.id === el.id);
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          return prevCart.map(item =>
+            item.id === el.id ? { ...item, quantity: item.quantity - 1 } : item
+          );
+        } else {
+          return prevCart.filter(item => item.id !== el.id);
+        }
       }
-      return true;
+      return prevCart;
     });
-    if (itemFound) {
-      setCart(updatedCart);
-    }
   };
 
   const cartItems = cart.map((el, index) => (
     <div key={index}>
       <img className="img-fluid" src={el.image} width={150} alt={el.title} />
-      {el.title} ${el.price}
+      {el.title} ${el.price} x {el.quantity}
     </div>
   ));
 
@@ -49,7 +74,11 @@ const Browse = () => {
           <p className="card-text">{el.description}</p>
           <p className="card-text"><strong>${el.price}</strong></p>
           <div className="d-flex justify-content-between">
-            <button className="btn btn-danger" onClick={() => removeFromCart(el)}>
+            <button
+              className="btn btn-danger"
+              onClick={() => removeFromCart(el)}
+              disabled={howManyofThis(el.id) === 0}
+            >
               -
             </button>
             <button className="btn btn-success" onClick={() => addToCart(el)}>
@@ -70,9 +99,9 @@ const Browse = () => {
           <h4>Shopping Cart</h4>
         </div>
         <div className="card-body">
-          <div>{cartItems}</div>
+          <div>{cartItems.length > 0 ? cartItems : <p>Your cart is empty</p>}</div>
           <div className="text-end">
-            <strong>Total: ${cartTotal}</strong>
+            <strong>Total: ${cartTotal.toFixed(2)}</strong>
           </div>
         </div>
       </div>
