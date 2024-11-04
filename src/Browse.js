@@ -59,6 +59,10 @@ const Browse = ({catalog, setCatalog, cart, setCart, cartTotal, setCartTotal}) =
     });
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const cartItems = cart.map((el, index) => (
     <div key={index}>
       <img className="img-fluid" src={el.image} width={150} alt={el.title} />
@@ -103,6 +107,11 @@ const Browse = ({catalog, setCatalog, cart, setCart, cartTotal, setCartTotal}) =
           <div>{cartItems.length > 0 ? cartItems : <p>Cart is Empty!</p>}</div>
           <div className="text-end">
             <strong>Total: ${cartTotal.toFixed(2)}</strong>
+            <div className="mt-2">
+              <button className="btn btn-warning" onClick={clearCart}>
+                Clear All
+              </button>
+            </div>
           </div>
         </div>
       </div>
