@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "./Navbar";
 
-const Browse = ({catalog, setCatalog, cart, setCart, cartTotal, setCartTotal}) => {
-  // const [catalog, setCatalog] = useState([]);
-  // const [cart, setCart] = useState([]);
-  // const [cartTotal, setCartTotal] = useState(0);
+const Browse = ({ catalog, setCatalog, cart, setCart, cartTotal, setCartTotal }) => {
+  const [searchQuery, setSearchQuery] = useState(""); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,6 +61,10 @@ const Browse = ({catalog, setCatalog, cart, setCart, cartTotal, setCartTotal}) =
     setCart([]);
   };
 
+  const filteredCatalog = catalog.filter((el) =>
+    el.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const cartItems = cart.map((el, index) => (
     <div key={index}>
       <img className="img-fluid" src={el.image} width={150} alt={el.title} />
@@ -70,7 +72,7 @@ const Browse = ({catalog, setCatalog, cart, setCart, cartTotal, setCartTotal}) =
     </div>
   ));
 
-  const listItems = catalog.map((el) => (
+  const listItems = filteredCatalog.map((el) => (
     <div className="col-md-4 mb-4" key={el.id}>
       <div className="card">
         <img src={el.image} className="card-img-top" alt={el.title} />
@@ -98,6 +100,13 @@ const Browse = ({catalog, setCatalog, cart, setCart, cartTotal, setCartTotal}) =
   return (
     <div className="container">
       <h2 className="my-4">Browse Fish</h2>
+      <input
+        type="text"
+        placeholder="Search fish by name"
+        className="form-control mb-4"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <div className="row">{listItems}</div>
       <div className="card mt-4">
         <div className="card-header">
