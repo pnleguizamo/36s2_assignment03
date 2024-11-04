@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import Navbar from "./Navbar";
 
-const Browse = () => {
-  const [catalog, setCatalog] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [cartTotal, setCartTotal] = useState(0);
+const Browse = ({catalog, setCatalog, cart, setCart, cartTotal, setCartTotal}) => {
+  // const [catalog, setCatalog] = useState([]);
+  // const [cart, setCart] = useState([]);
+  // const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
