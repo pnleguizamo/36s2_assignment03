@@ -5,20 +5,24 @@ import './App.css';
 import ShowProducts from './ShowProducts';
 import Navbar from "./Navbar";
 import React, { useState, useEffect } from "react";
+import Summary from './MySummary';
 
 function App() {
 
   const [catalog, setCatalog] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
+  const [dataf, setDataF] = useState([]);
   const [viewer, setViewer] = useState(0);
 
   const renderComponent = () => {
     switch (viewer) {
       case 0:
-        return <Browse catalog = {catalog} setCatalog = {setCatalog} cart = {cart} setCart = {setCart} cartTotal={cartTotal} setCartTotal={setCartTotal} />;
+        return <Browse catalog={catalog} setCatalog={setCatalog} cart={cart} setCart={setCart} cartTotal={cartTotal} setCartTotal={setCartTotal} />;
       case 1:
-        return <ShowProducts cart = {cart} setCart = {setCart}/>;
+        return <ShowProducts cart={cart} setCart={setCart} cartTotal={cartTotal} setCartTotal={setCartTotal} dataF = {dataf} setDataF = {setDataF} viewer = {viewer} setViewer = {setViewer} />;
+      case 2:
+        return <Summary dataF = {dataf} setDataF = {setDataF} />;
     }
   };
 

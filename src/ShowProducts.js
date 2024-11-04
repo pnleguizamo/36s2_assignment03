@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from "./Navbar";
+import Payment from './MyPayment';
 
 
 
 
-function ShowProducts({ cart, setCart }) {
+function ShowProducts({ cart, setCart, cartTotal, setCartTotal, dataF, setDataF, viewer, setViewer }) {
   // const [catalog, setCatalog] = useState([]);
   // const [filteredCatalog, setFilteredCatalog] = useState([]);
   // const [categories, setCategories] = useState([]);
@@ -39,25 +40,32 @@ function ShowProducts({ cart, setCart }) {
     const uniqueProducts = {};
 
     cart.forEach(product => {
-        if (!uniqueProducts[product.id]) {
-            uniqueProducts[product.id] = { ...product, quantity: product.quantity }; 
-        } else {
-            uniqueProducts[product.id].quantity += product.quantity;
-        }
+      if (!uniqueProducts[product.id]) {
+        uniqueProducts[product.id] = { ...product, quantity: product.quantity };
+      } else {
+        uniqueProducts[product.id].quantity += product.quantity;
+      }
     });
 
-    
-    return Object.values(uniqueProducts);
-};
 
-const uniqueProductsArray = getUniqueProductsWithQuantities(cart);
+    return Object.values(uniqueProducts);
+  };
+
+  const cartItems = cart.map((el, index) => (
+    <div key={index}>
+      <img className="img-fluid" src={el.image} width={150} alt={el.title} />
+      {el.title} ${el.price} x {el.quantity}
+    </div>
+  ));
+
+  const uniqueProductsArray = getUniqueProductsWithQuantities(cart);
 
 
   return (
     <div >
 
       {/* <Navbar/> */}
-      <div className="table-responsive small">
+      {/* <div className="table-responsive small">
         <table className="table table-striped table-sm">
           <thead>
             <tr>
@@ -82,7 +90,15 @@ const uniqueProductsArray = getUniqueProductsWithQuantities(cart);
             ))}
           </tbody>
         </table>
+      </div> */}
+
+      <div className="card-body">
+        <div>{cartItems.length > 0 ? cartItems : <p>Cart is Empty!</p>}</div>
+        <div className="text-end">
+          <strong>Total: ${cartTotal.toFixed(2)}</strong>
+        </div>
       </div>
+      <Payment dataF = {dataF} setDataF = {setDataF} viewer = {viewer} setViewer = {setViewer} />
     </div>
   );
 }
