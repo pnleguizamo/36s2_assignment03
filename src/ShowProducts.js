@@ -29,12 +29,15 @@ function ShowProducts({ cart, setCart, cartTotal, setCartTotal, dataF, setDataF,
                   {product.quantity}
                 </td>
                 <td>
-                  {product.price}
+                  {product.price * product.quantity}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="text-end p-3">
+          <strong>Total: ${cartTotal.toFixed(2)}</strong>
+        </div>
       </div>
       <Payment dataF = {dataF} setDataF = {setDataF} viewer = {viewer} setViewer = {setViewer} />
     </div>
