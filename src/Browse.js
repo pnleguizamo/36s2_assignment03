@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import Navbar from "./Navbar";
 
 const Browse = ({ catalog, setCatalog, cart, setCart, cartTotal, setCartTotal }) => {
   const [searchQuery, setSearchQuery] = useState(""); 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from "./Navbar";
-import Payment from './MyPayment';
+import Payment from './PaymentInfo';
 
 
 
@@ -63,9 +61,7 @@ function ShowProducts({ cart, setCart, cartTotal, setCartTotal, dataF, setDataF,
 
   return (
     <div >
-
-      {/* <Navbar/> */}
-      {/* <div className="table-responsive small">
+      <div className="table-responsive small">
         <table className="table table-striped table-sm">
           <thead>
             <tr>
@@ -75,10 +71,11 @@ function ShowProducts({ cart, setCart, cartTotal, setCartTotal, dataF, setDataF,
             </tr>
           </thead>
           <tbody id="cart_body">
-            {uniqueProductsArray.map((product) => (
+            {cart.map((product) => (
               <tr key={product.id}>
                 <td>
                   <img src={product.image} width={150} alt="Item" />
+                  <h3>{product.title}</h3>
                 </td>
                 <td>
                   {howManyofThis(product.id)}
@@ -90,13 +87,6 @@ function ShowProducts({ cart, setCart, cartTotal, setCartTotal, dataF, setDataF,
             ))}
           </tbody>
         </table>
-      </div> */}
-
-      <div className="card-body">
-        <div>{cartItems.length > 0 ? cartItems : <p>Cart is Empty!</p>}</div>
-        <div className="text-end">
-          <strong>Total: ${cartTotal.toFixed(2)}</strong>
-        </div>
       </div>
       <Payment dataF = {dataF} setDataF = {setDataF} viewer = {viewer} setViewer = {setViewer} />
     </div>

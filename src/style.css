@@ -16,7 +16,7 @@ body {
     transition: transform 0.2s;
 }
 
-.card:hover {
+.container .card:hover {
     transform: translateY(-5px);
 }
 
@@ -68,4 +68,32 @@ body {
 .text-end {
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; 
+    padding: 1rem; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    z-index: 1000; 
+}
+
+
+.nav-button {
+    background-color: #007bff; 
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #0056b3; 
 }
